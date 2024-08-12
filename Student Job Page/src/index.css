@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: black;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    position: relative;
+    overflow: hidden; /* Ensure no overflow */
+  }
+
+  /* Northern Lights effect */
+  .northern-lights {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%; /* Spread over the screen */
+    height: 200%; /* Spread over the screen */
+    background: linear-gradient(180deg, rgba(0, 255, 255, 0.3), rgba(0, 0, 0, 0) 70%);
+    opacity: 0.3; /* Decreased opacity */
+    animation: moveLights 15s linear infinite; /* Slower movement */
+    pointer-events: none; /* Allow clicks to pass through */
+  }
+
+  @keyframes moveLights {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
+
+  /* Styles for stars */
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle 1.5s infinite alternate, float 3s infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes float {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(0, -5px); } /* Increased movement */
+    100% { transform: translate(0, 0); }
+  }
+
+  /* Styles for shooting stars */
+  .shooting-star {
+    position: absolute;
+    width: 4px; /* Increased size for visibility */
+    height: 4px; /* Increased size for visibility */
+    background-color: yellow; /* Different color for shooting stars */
+    border-radius: 50%;
+    animation: shoot 3s linear forwards; /* Shooting stars last for 3 seconds */
+    box-shadow: 0 0 20px yellow; /* Longer trail effect */
+  }
+
+  @keyframes shoot {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(100vw, -100vh) scale(0);
+      opacity: 0; /* Fade out */
+    }
+  }
+
+  /* Search Bar Styles */
+  .search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 0; /* Margin for spacing */
+  }
+
+  .search-bar input {
+    width: 100%; /* Full width */
+    padding: 12px 20px; /* Padding for better spacing */
+    border: 2px solid #4A90E2; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    color: #333; /* Text color */
+    background-color: rgba(255, 255, 255, 0.9); /* Light background */
+    transition: all 0.3s ease; /* Smooth transition */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+
+  /* Input hover effect */
+  .search-bar input:hover {
+    border-color: #007BFF; /* Change border color on hover */
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2); /* Shadow on hover */
+  }
+
+  /* Input focus effect */
+  .search-bar input:focus {
+    outline: none; /* Remove default outline */
+    border-color: #007BFF; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Focus shadow */
+  }
+
+  /* Search button styles */
+  .search-bar button {
+    position: absolute; /* Positioning */
+    right: 10px; /* Positioning */
+    background-color: #4A90E2; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Padding for button */
+    cursor: pointer; /* Pointer cursor */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+
+  /* Button hover effect */
+  .search-bar button:hover {
+    background-color: #007BFF; /* Darker shade on hover */
+  }
+}
+
+/* Add this to generate stars */
+@for $i from 1 through 100 {
+  .star:nth-child(#{$i}) {
+    left: random(100)%;
+    top: random(100)%;
+    animation-delay: random(5)s;
+  }
+}
